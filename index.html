@@ -1,0 +1,187 @@
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для Насти</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffd6e7 0%, #e7f2ff 100%);
+            font-family: 'Montserrat', sans-serif;
+            color: #555;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 1;
+            max-width: 90%;
+            width: 400px;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+        }
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: #ff6b9e;
+            margin-bottom: 15px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .compliment {
+            font-size: 1.3rem;
+            margin: 15px 0;
+            font-family: 'Montserrat', sans-serif;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.5;
+        }
+        .compliment.show {
+            opacity: 1;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #ff6b9e, #9e6bff);
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.3s ease;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #ff5790, #8c57ff);
+            transform: scale(1.05);
+        }
+
+        /* Анимация лепестков */
+        .petals {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .petal {
+            position: absolute;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff9eb5"><path d="M12 2C13.1 2 14 2.9 14 4S13.1 6 12 6 10 5.1 10 4 10.9 2 12 2m0 18c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2m0-14c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>') no-repeat;
+            width: 20px;
+            height: 20px;
+            animation: float 6s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 100vh) rotate(0deg); }
+            100% { transform: translate(calc(100vw * var(--random-x)), -20vh) rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Адаптация для телефонов */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.3rem;
+            }
+            .container {
+                padding: 20px;
+            }
+            .compliment {
+                font-size: 1.1rem;
+                min-height: 70px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="petals" id="petals"></div>
+    <div class="container">
+        <h1>Насть</h1>
+        <div class="compliment" id="compliment">Нажми на кнопку — пусть сегодня тебя порадует теплый комплимент!</div>
+        <button onclick="generateCompliment()">🌸 Получить комплимент</button>
+    </div>
+
+    <script>
+        const compliments = [
+            "Насть, у тебя самая искренняя улыбка!",
+            "Твои глаза такие лучистые!",
+            "Ты особенно сияешь!",
+            "У тебя потрясающий стиль!",
+            "Насть, твоя улыбка поднимает настроение!",
+            "Ты выглядишь невероятно!",
+            "Настенька, у тебя очень красивые глаза!",
+            "Насть, у тебя ангельское терпение!",
+            "Насть, с тобой так легко!",
+            "Ты умеешь слушать, как никто другой!",
+            "У тебя дар располагать к себе людей!",
+            "Насть, твоя энергия заряжает позитивом!",
+            "Ты умеешь подобрать нужные слова!",
+            "Насть, ты создаешь уют вокруг себя!",
+            "Насть, с тобой можно быть собой!",
+    
+            "Ты умеешь радоваться мелочам!",
+            "Насть, ты даришь тепло своей улыбкой!",
+            "Ты сочетаешь красоту и доброту!"
+        ];
+
+        const complimentElement = document.getElementById('compliment');
+        const petalsContainer = document.getElementById('petals');
+
+        function generateCompliment() {
+            const randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
+            
+            complimentElement.classList.remove('show');
+            setTimeout(() => {
+                complimentElement.textContent = randomCompliment;
+                complimentElement.classList.add('show');
+            }, 300);
+            
+            addPetals();
+            document.body.style.background = `linear-gradient(135deg, ${getRandomPastelColor()} 0%, ${getRandomPastelColor()} 100%)`;
+        }
+
+        function getRandomPastelColor() {
+            const colors = ['#ffd6e7', '#e7f2ff', '#f2e7ff', '#e7ffed', '#fff2e7'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function addPetals() {
+            petalsContainer.innerHTML = '';
+            
+            for (let i = 0; i < 8; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = `${Math.random() * 100}vw`;
+                petal.style.width = `${Math.random() * 15 + 10}px`;
+                petal.style.height = petal.style.width;
+                petal.style.animationDuration = `${Math.random() * 4 + 3}s`;
+                petal.style.setProperty('--random-x', Math.random() * 0.6 + 0.2);
+                petalsContainer.appendChild(petal);
+            }
+        }
+
+        // Инициализация
+        addPetals();
+    </script>
+</body>
+</html>>
