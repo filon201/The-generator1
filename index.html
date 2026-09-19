@@ -1,10 +1,12 @@
- <!DOCTYPE html>
+```html
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Для Насти</title>
+    <title>Для Даши 🌸</title>
     <style>
+        * { box-sizing: border-box; }
         body {
             margin: 0;
             padding: 0;
@@ -16,172 +18,433 @@
             font-family: 'Montserrat', sans-serif;
             color: #555;
             overflow: hidden;
+            transition: background 2s ease;
         }
+
         .container {
             text-align: center;
             background: rgba(255, 255, 255, 0.96);
-            padding: 30px;
-            border-radius: 18px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            padding: 40px 30px;
+            border-radius: 26px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 1;
-            max-width: 90%;
-            width: 400px;
-            border: 1px solid rgba(255, 182, 193, 0.3);
+            max-width: 92%;
+            width: 450px;
+            border: 1.5px solid rgba(255, 182, 193, 0.35);
+            animation: gentlePulse 4s infinite alternate;
         }
+
+        @keyframes gentlePulse {
+            0% { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); }
+            100% { box-shadow: 0 12px 40px rgba(255, 105, 180, 0.15); }
+        }
+
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.8rem;
-            color: #ff6b9e;
-            margin-bottom: 15px;
-            animation: fadeIn 1.5s ease-in-out;
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #ff6b9e, #ff9eb5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0 0 15px;
+            animation: titleGlow 3s infinite alternate;
+            padding: 0 10px;
         }
-        .compliment {
-            font-size: 1.3rem;
-            margin: 15px 0;
-            font-family: 'Montserrat', sans-serif;
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 8px rgba(255, 107, 158, 0.3); }
+            100% { text-shadow: 0 0 20px rgba(255, 107, 158, 0.6); }
+        }
+
+        /* === ПРИВЕТСТВЕННАЯ НАДПИСЬ === */
+        .welcome {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #666;
+            line-height: 1.5;
+            margin: 20px 0 25px;
             opacity: 0;
-            transition: opacity 0.7s ease;
-            min-height: 80px;
+            transform: translateY(15px);
+            transition: all 1s ease;
+            min-height: 65px;
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1.5;
+            padding: 0 15px;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .welcome.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .welcome.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* === КОМПЛИМЕНТ === */
+        .compliment {
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            min-height: 95px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.6;
+            color: #444;
+            padding: 0 10px;
         }
         .compliment.show {
             opacity: 1;
+            transform: translateY(0);
         }
+
+        /* === НАСТРОЕНИЕ === */
+        .mood {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #ff8cb5;
+            margin: 15px 0 25px;
+            opacity: 0.9;
+            font-weight: 500;
+            padding: 0 10px;
+            min-height: 30px;
+        }
+
         button {
-            padding: 12px 25px;
-            font-size: 1rem;
+            padding: 15px 35px;
+            font-size: 1.1rem;
             border: none;
             border-radius: 50px;
             background: linear-gradient(45deg, #ff6b9e, #9e6bff);
             color: white;
             cursor: pointer;
-            transition: transform 0.2s ease, background 0.3s ease;
-            margin-top: 15px;
-            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 20px 0 5px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 107, 158, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.6s;
         }
         button:hover {
             background: linear-gradient(45deg, #ff5790, #8c57ff);
-            transform: scale(1.05);
+            transform: translateY(-2px) scale(1.06);
+            box-shadow: 0 6px 20px rgba(255, 107, 158, 0.4);
         }
+        button:hover::before { left: 100%; }
+        button:active { transform: translateY(0) scale(1.03); }
 
-        /* Анимация лепестков */
-        .petals {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
+        .petals { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 0; 
+            pointer-events: none; 
         }
         .petal {
             position: absolute;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff9eb5"><path d="M12 2C13.1 2 14 2.9 14 4S13.1 6 12 6 10 5.1 10 4 10.9 2 12 2m0 18c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2m0-14c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>') no-repeat;
-            width: 20px;
-            height: 20px;
-            animation: float 6s linear infinite;
-            opacity: 0.7;
+            width: 22px; 
+            height: 22px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 C70 10, 90 30, 90 50 C90 70, 70 90, 50 90 C30 90, 10 70, 10 50 C10 30, 30 10, 50 10 Z" fill="%23ffb6d9" opacity="0.9"/><path d="M50 20 C65 20, 80 35, 80 50 C80 65, 65 80, 50 80 C35 80, 20 65, 20 50 C20 35, 35 20, 50 20 Z" fill="%23ff9ec8"/></svg>') center/contain no-repeat;
+            animation: petalFloat 7s linear infinite;
+            opacity: 0.75;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+        }
+        @keyframes petalFloat {
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.75; }
+            90% { opacity: 0.75; }
+            100% { transform: translate(calc(100vw * var(--drift)), -30vh) rotate(380deg) scale(1.1); opacity: 0; }
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 100vh) rotate(0deg); }
-            100% { transform: translate(calc(100vw * var(--random-x)), -20vh) rotate(360deg); }
+        .heart {
+            position: absolute;
+            font-size: 1.8rem;
+            pointer-events: none;
+            animation: heartRise 1.2s ease-out forwards;
+            opacity: 0.9;
+        }
+        @keyframes heartRise {
+            0% { transform: translateY(0) scale(0.5); opacity: 0.9; }
+            100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Адаптация для телефонов */
+        /* === АДАПТИВ === */
         @media (max-width: 600px) {
-            h1 {
-                font-size: 2.3rem;
+            .container { 
+                padding: 30px 20px; 
+                width: 95%; 
+                margin: 15px;
             }
-            .container {
-                padding: 20px;
+            h1 { 
+                font-size: 2.8rem; 
+                margin: 0 0 12px; 
             }
-            .compliment {
-                font-size: 1.1rem;
-                min-height: 70px;
+            .welcome { 
+                font-size: 1.05rem; 
+                margin: 18px 0 22px; 
+                min-height: 60px; 
+                padding: 0 12px; 
+            }
+            .compliment { 
+                font-size: 1.25rem; 
+                margin: 22px 0 12px; 
+                min-height: 85px; 
+            }
+            .mood { 
+                font-size: 1.05rem; 
+                margin: 12px 0 22px; 
+            }
+            button { 
+                padding: 14px 30px; 
+                font-size: 1.05rem; 
+                margin: 18px 0 5px; 
+            }
+        }
+        @media (max-width: 480px) {
+            .container { 
+                padding: 25px 18px; 
+                border-radius: 22px; 
+            }
+            h1 { font-size: 2.5rem; }
+            .welcome { 
+                font-size: 1rem; 
+                margin: 15px 0 20px; 
+                padding: 0 10px; 
+            }
+            .compliment { 
+                font-size: 1.15rem; 
+                margin: 20px 0 10px; 
+            }
+            .mood { 
+                font-size: 1rem; 
+                margin: 10px 0 20px; 
+            }
+            button { 
+                padding: 13px 28px; 
+                font-size: 1rem; 
+                margin: 15px 0 5px; 
+            }
+        }
+        @media (max-width: 380px) {
+            h1 { 
+                font-size: 2.3rem; 
+                margin: 0 0 10px; 
+            }
+            .welcome { 
+                font-size: 0.95rem; 
+                margin: 12px 0 18px; 
+                line-height: 1.4; 
+            }
+            .compliment { 
+                font-size: 1.1rem; 
+                margin: 18px 0 8px; 
+                min-height: 80px; 
+            }
+            .mood { 
+                font-size: 0.95rem; 
+                margin: 8px 0 18px; 
+            }
+            button { 
+                padding: 12px 25px; 
+                font-size: 0.95rem; 
+                margin: 12px 0 5px; 
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="petals" id="petals"></div>
     <div class="container">
-        <h1>Насть</h1>
-        <div class="compliment" id="compliment">Нажми на кнопку — пусть сегодня тебя порадует теплый комплимент!</div>
-        <button onclick="generateCompliment()">🌸 Получить комплимент</button>
+        <h1>Даша 🌸</h1>
+
+        <!-- Приветственная надпись -->
+        <div class="welcome" id="welcome">
+            Даша, это уголок для твоей  <span style="color:#ff6b9e; font-weight:600;">улыбки</span>
+        </div>
+
+        <!-- Комплимент (изначально скрыт) -->
+        <div class="compliment" id="compliment"></div>
+
+        <!-- Настроение под комплиментом -->
+        <div class="mood" id="mood"></div>
+
+        <button id="btn">✨ Получить комплимент</button>
     </div>
 
     <script>
+        // === КОМПЛИМЕНТЫ ===
         const compliments = [
-            "Насть, у тебя самая искренняя улыбка!",
-            "Твои глаза такие лучистые!",
-            "Ты особенно сияешь!",
-            "У тебя потрясающий стиль!",
-            "Насть, твоя улыбка поднимает настроение!",
-            "Ты выглядишь невероятно!",
-            "Настенька, у тебя очень красивые глаза!",
-            "Насть, у тебя ангельское терпение!",
-            "Насть, с тобой так легко!",
-            "Ты умеешь слушать, как никто другой!",
-            "У тебя дар располагать к себе людей!",
-            "Насть, твоя энергия заряжает позитивом!",
-            "Ты умеешь подобрать нужные слова!",
-            "Насть, ты создаешь уют вокруг себя!",
-            "Насть, с тобой можно быть собой!",
-    
-            "Ты умеешь радоваться мелочам!",
-            "Насть, ты даришь тепло своей улыбкой!",
-            "Ты сочетаешь красоту и доброту!"
+            "Даша, ты та, от которой веет светом и добротой ✨",
+            "Твоя улыбка — как утренний луч, мягкий и тёплый ☀️",
+            "Ты — та, которая делает мир прекрасней одной улыбкой 🌸",
+            "Твоя энергия — как весенний ветерок, свежая и вдохновляющая 🌿",
+            "Даша, твоя душа полна света и тепла 💫",
+            "Ты умеешь быть собой — и это восхищает 🌟",
+            "Твоя искренность — как цветок, который всегда распускается вовремя 🌷",
+            "Рядом с тобой становится уютно и спокойно 🕊️",
+            "Твоя улыбка — маленькое чудо 😊",
+            "Даша, ты — та, в которой живёт настоящая красота 🌺",
+            "Ты умеешь видеть красоту в мелочах — это твой дар 🎨",
+            "Твоя доброта — как мягкий свет в сумерках 🕯️",
+            "Даша, ты та, которая оставляет после себя тепло и улыбки 🌅",
+            "Твоя лёгкость — как полёт бабочки, свободный и прекрасный 🦋",
+            "Даша, ты та, которая умеет радоваться жизни 🌈",
+            "Ты вдохновляешь быть лучше — просто будучи собой 🌱",
+            "Твои слова — как капли росы, свежие и чистые 💧",
+            "Твоя улыбка — это прекрасное явление 😌",
+            "Даша, ты прекрасна как звездное небо 🌟",
+            "Ты умеешь создавать уют одним своим присутствием 🏡",
+            "Твоя душа — как сад, полный цветов и света 🌸",
+            "Ты — та девушка, которая делает обычный день особенным ✨",
+            "Даша, ты та девушка, рядом с которой хочется улыбаться 😊",
+            "Ты — как тёплый плед в холодный вечер 🧶",
+            "Твоя красота — не только внешняя, но и внутренняя, и она завораживает 💖",
+            "Ты — свет, который не гаснет никогда 🌟"
         ];
 
-        const complimentElement = document.getElementById('compliment');
+        // === ФРАЗЫ ДЛЯ НАСТРОЕНИЯ ===
+        const moods = [
+            "Иногда день бывает идеально лёгким и красивым",
+            "Бывает настроение — свежее и ясное, как утро",
+            "В мире есть своя весна, даже когда её не ждёшь",
+            "Иногда хочется улыбаться просто так, без повода",
+            "Настроение может быть лёгким и воздушным, как облако",
+            "Внутри может гореть свой собственный тёплый свет",
+            "Некоторые дни похожи на любимую песню",
+            "Бывают моменты тихой и спокойной радости",
+            "Иногда в душе сами собой появляются искорки счастья",
+            "Есть дни, которые созданы для лёгкости и улыбок",
+            "Красота часто прячется в простых вещах",
+            "Иногда всё складывается легко и гармонично",
+            "Мир умеет быть удивительно нежным",
+            "Бывают моменты совершенной лёгкости бытия",
+            "Иногда всё вокруг наполняется особенным светом",
+            "Просто хороший день — это уже подарок",
+            "Вокруг столько всего, что может вдохновить",
+            "Иногда настроение поднимается само собой",
+            "Есть красота в этой лёгкости и простоте",
+            "Мир прекрасен в свои самые обычные моменты"
+        ];
+
+        const welcomeEl = document.getElementById('welcome');
+        const complimentEl = document.getElementById('compliment');
+        const moodEl = document.getElementById('mood');
+        const btn = document.getElementById('btn');
         const petalsContainer = document.getElementById('petals');
 
+        let firstClick = true;
+
+        // === ГЕНЕРАЦИЯ КОМПЛИМЕНТА + НАСТРОЕНИЕ ===
         function generateCompliment() {
-            const randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
-            
-            complimentElement.classList.remove('show');
+            if (firstClick) {
+                welcomeEl.classList.remove('show');
+                welcomeEl.classList.add('hidden');
+                firstClick = false;
+
+                setTimeout(() => {
+                    welcomeEl.style.display = 'none';
+                    complimentEl.style.display = 'flex';
+                    moodEl.style.display = 'block';
+                    showRandomComplimentAndMood();
+                }, 800);
+            } else {
+                showRandomComplimentAndMood();
+            }
+
+            changeBackground();
+            createPetals(10);
+            createHearts();
+        }
+
+        function showRandomComplimentAndMood() {
+            complimentEl.classList.remove('show');
             setTimeout(() => {
-                complimentElement.textContent = randomCompliment;
-                complimentElement.classList.add('show');
-            }, 300);
-            
-            addPetals();
-            document.body.style.background = `linear-gradient(135deg, ${getRandomPastelColor()} 0%, ${getRandomPastelColor()} 100%)`;
+                const idx = Math.floor(Math.random() * compliments.length);
+                complimentEl.textContent = compliments[idx];
+                complimentEl.classList.add('show');
+            }, 400);
+
+            setTimeout(() => {
+                const moodIdx = Math.floor(Math.random() * moods.length);
+                moodEl.textContent = moods[moodIdx];
+                moodEl.style.opacity = '0';
+                setTimeout(() => { moodEl.style.opacity = '0.9'; }, 100);
+            }, 600);
         }
 
-        function getRandomPastelColor() {
-            const colors = ['#ffd6e7', '#e7f2ff', '#f2e7ff', '#e7ffed', '#fff2e7'];
-            return colors[Math.floor(Math.random() * colors.length)];
+        function changeBackground() {
+            const gradients = [
+                'linear-gradient(135deg, #ffd6e7 0%, #e7f2ff 100%)',
+                'linear-gradient(135deg, #f2e7ff 0%, #e7ffed 100%)',
+                'linear-gradient(135deg, #fff2e7 0%, #ffd6e7 100%)',
+                'linear-gradient(135deg, #e7ffed 0%, #f2e7ff 100%)',
+                'linear-gradient(135deg, #ffe7f9 0%, #e7f2ff 100%)'
+            ];
+            document.body.style.background = gradients[Math.floor(Math.random() * gradients.length)];
         }
 
-        function addPetals() {
+        function createPetals(count = 8) {
             petalsContainer.innerHTML = '';
-            
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < count; i++) {
                 const petal = document.createElement('div');
                 petal.classList.add('petal');
                 petal.style.left = `${Math.random() * 100}vw`;
-                petal.style.width = `${Math.random() * 15 + 10}px`;
-                petal.style.height = petal.style.width;
-                petal.style.animationDuration = `${Math.random() * 4 + 3}s`;
-                petal.style.setProperty('--random-x', Math.random() * 0.6 + 0.2);
+                petal.style.animationDelay = `${Math.random() * 2}s`;
+                petal.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                const drift = (Math.random() - 0.5) * 0.8;
+                petal.style.setProperty('--drift', drift);
+                const size = Math.random() * 15 + 15;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size}px`;
                 petalsContainer.appendChild(petal);
             }
         }
 
-        // Инициализация
-        addPetals();
+        function createHearts() {
+            for (let i = 0; i < 6; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.textContent = ['🌸','✨','🌺','🌟','🪷','💖'][Math.floor(Math.random()*6)];
+                heart.style.left = `${45 + (Math.random() - 0.5) * 30}%`;
+                heart.style.animationDelay = `${i * 0.1}s`;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1500);
+            }
+        }
+
+        // === ИНИЦИАЛИЗАЦИЯ ===
+        createPetals(6);
+        btn.addEventListener('click', generateCompliment);
+
+        setTimeout(() => welcomeEl.classList.add('show'), 300);
+
+        complimentEl.style.display = 'none';
+        moodEl.style.display = 'none';
     </script>
 </body>
-</html>>
+</html>
+```
